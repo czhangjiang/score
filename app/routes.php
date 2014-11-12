@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+
+
+Route::controller('auth', 'AuthController');
+
+Route::group(array('prefix' => '/', 'before' => 'auth'), function(){
+	Route::get('/', 'HomeController@index');
+	Route::controller('system', 'SystemController');
 });
